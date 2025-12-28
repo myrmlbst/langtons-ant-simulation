@@ -3,8 +3,7 @@ Grid.__index = Grid
 
 
 function Grid.new(cellSize, width, height)
-    local self = setmetatable({}, Grid)
-    
+    local self = setmetatable({}, Grid)    
     self.cellSize = cellSize or 20
     self.width = width or 40
     self.height = height or 30
@@ -17,7 +16,6 @@ function Grid.new(cellSize, width, height)
             self.cells[y][x] = 0
         end
     end
-    
     return self
 end
 

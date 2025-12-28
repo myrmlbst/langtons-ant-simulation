@@ -48,4 +48,21 @@ _(*) Researchers have shown that, by modifying rules or initial configurations, 
 ### Directory Structure
 ```
 langtons-ant/
+├── components/      
+│   ├── grid.lua            # grid component
+│   └── welcome.lua         # home page component
+│
+├── assets/
+│   ├── sounds/             # audio files for visualizations
+│   └── images/             # screenshots and images
+│
+├── doc/                    # remaining to-do's
+│   └── implementation.md   # implementation details (rules of the game)
+│
+├── main.lua                # init main sim loop
+├── conf.lua                # pop-up page configs
+├── .gitignore              # ignore editor configs
+│ 
+├── LICENSE
+└── README.md
 ```

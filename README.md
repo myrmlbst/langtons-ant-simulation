@@ -48,7 +48,8 @@ A system is said to be Turing-complete if it can simulate any computation when g
 ### Directory Structure
 ```
 langtons-ant/
-├── components/      
+├── components/  
+│   ├── ant.lua             # ant movement logic
 │   ├── grid.lua            # grid component
 │   └── welcome.lua         # home page component
 │

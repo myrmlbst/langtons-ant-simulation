@@ -1,5 +1,15 @@
-## Steps to Implement
+# Steps to Implement
 
-1. Implement the Grid
-2. Implement the Ant adding functionality (users should be able to add 1 ant on the grid... maybe change this in the future so we can have multiple ants on the grid and simulate their behaviors too)
-3. Implement Ant movement (use laws from README.md)
+## Core Implementation
+1. ~~Implement the Grid~~
+2. ~~Implement the Ant adding functionality~~
+3. ~~Implement Ant movement (use laws from README.md)~~
+
+## Enhancements (Optional):
+- Allow user to add the ant manually by clicking on the grid (+ picking which direction the ant is facing)
+- Add multiple ants with different starting positions and facing directions
+- Add `speed up` and `slow down` functionality
+- Add `ESC` to go out of simulation
+- Add `SPACE` to pause/resume simulation
+- Add `R` to reset simulation
+- Add `C` to clear the grid

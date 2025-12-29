@@ -43,7 +43,7 @@ A system is said to be Turing-complete if it can simulate any computation when g
 ## About this Code Repository
 ### Installation Instructions
 - If you'd like to run this project locally, make sure you first have the [Lua](https://www.lua.org/download.html) programming language and the [LÖVE2D](https://love2d.org/) game engine installed locally.
-- Then, clone this repository, cd into the project, and run ```love .``` in the terminal to run the simulation.
+- Then, clone this repository, ```cd``` into the project, and run ```love .``` in the terminal to run the simulation.
 
 ### Directory Structure
 ```
@@ -56,7 +56,7 @@ langtons-ant/
 │   ├── sounds/             # audio files for visualizations
 │   └── images/             # screenshots and images
 │
-├── docs/                   # remaining to-do's
+├── docs/
 │   └── implementation.md   # implementation details (rules of the game)
 │
 ├── main.lua                # init main simulation loop

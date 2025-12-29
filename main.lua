@@ -10,7 +10,7 @@ local GAME_STATE = {
 
 local gameState = GAME_STATE.WELCOME
 
-local grid, ant
+local grid, ants
 local cellSize = 5
 local smallFont = love.graphics.newFont(12)
 
@@ -39,9 +39,7 @@ function love.load()
     
     -- initialize grid and place ant in the center
     grid = Grid.new(cellSize, gridWidth, gridHeight)
-    local startX = math.floor(gridWidth / 2)
-    local startY = math.floor(gridHeight / 2)
-    ant = Ant.new(startX, startY)
+    ants = {}
     
     -- initialize simulation controls
     isSimulationRunning = false
@@ -56,19 +54,20 @@ function love.update(dt)
     elseif gameState == GAME_STATE.GRID_VIEW and isSimulationRunning then
         -- run simulation steps
         for i = 1, simulationSpeed do
-            if ant then
+            for antIndex = #ants, 1, -1 do
+                local ant = ants[antIndex]
                 ant:update(grid)
                 stepCounter = stepCounter + 1
-                
+
                 -- check if ant is out of bounds
                 if not grid:isInBounds(ant.x, ant.y) then
-                    -- reset ant position to center if it goes out of bounds
-                    local gridWidth, gridHeight = grid:getDimensions()
-                    ant = Ant.new(
-                        math.floor(gridWidth / 2),
-                        math.floor(gridHeight / 2)
-                    )
+                    table.remove(ants, antIndex)
                 end
+            end
+
+            if #ants == 0 then
+                isSimulationRunning = false
+                break
             end
         end
     end
@@ -102,9 +101,11 @@ function love.draw()
         for y = 0, gridHeight do
             love.graphics.line(0, y * cellSize, gridWidth * cellSize, y * cellSize)
         end
-        
-        if ant and grid:isInBounds(ant.x, ant.y) then
-            ant:draw(cellSize)
+
+        for _, ant in ipairs(ants) do
+            if grid:isInBounds(ant.x, ant.y) then
+                ant:draw(cellSize)
+            end
         end
 
         -- save current font
@@ -124,10 +125,12 @@ function love.draw()
         local controls = {
             "Space: " .. (isSimulationRunning and "Pause" or "Start"),
             "R: Reset",
+            "Click on Cell: Add ant",
+            -- "Right Click: Toggle cell",
             "+/−: Change speed",
             "ESC: Quit"
         }
-        
+
         for _, text in ipairs(controls) do
             love.graphics.print(text, x, y)
             y = y + lineHeight
@@ -147,19 +150,27 @@ function love.mousepressed(x, y, button, istouch, presses)
     if gameState == GAME_STATE.WELCOME then
         if Welcome.mousepressed(x, y, button) then
             gameState = GAME_STATE.GRID_VIEW
+            isSimulationRunning = false
+            stepCounter = 0
         end
     
-    elseif gameState == GAME_STATE.GRID_VIEW and button == 1 then
-        -- toggle cell state on click
+    elseif gameState == GAME_STATE.GRID_VIEW and (button == 1 or button == 2) then
         local cellX = math.floor(x / cellSize) + 1
         local cellY = math.floor(y / cellSize) + 1
         
         if grid:isInBounds(cellX, cellY) then
-            local current = grid:getCell(cellX, cellY)
-            grid:setCell(cellX, cellY, 1 - current)
+            if button == 1 then
+                ants[#ants + 1] = Ant.new(cellX, cellY)
+            else
+                -- toggle cell state on right click
+                local current = grid:getCell(cellX, cellY)
+                grid:setCell(cellX, cellY, 1 - current)
+            end
         end
     end
+
 end
+
 
 function love.keypressed(key)
     if key == "escape" then
@@ -169,15 +180,15 @@ function love.keypressed(key)
     
     if gameState == GAME_STATE.GRID_VIEW then
         if key == "space" then
-            isSimulationRunning = not isSimulationRunning
+            if #ants > 0 then
+                isSimulationRunning = not isSimulationRunning
+            end
         
         elseif key == "r" then
             -- reset simulation
             local gridWidth, gridHeight = grid:getDimensions()
             grid = Grid.new(cellSize, gridWidth, gridHeight)
-            local startX = math.floor(gridWidth / 2)
-            local startY = math.floor(gridHeight / 2)
-            ant = Ant.new(startX, startY)
+            ants = {}
             stepCounter = 0
             isSimulationRunning = false
         
@@ -191,9 +202,14 @@ function love.keypressed(key)
         
         elseif key == "return" and not isSimulationRunning then
             -- single step when simulation is paused
-            if ant then
+            for antIndex = #ants, 1, -1 do
+                local ant = ants[antIndex]
                 ant:update(grid)
                 stepCounter = stepCounter + 1
+
+                if not grid:isInBounds(ant.x, ant.y) then
+                    table.remove(ants, antIndex)
+                end
             end
         end
         

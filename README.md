@@ -28,17 +28,17 @@ _Emergence_ means that some global structure appears despite the fact that each 
 
 Despite all of that, the ant emerges from apparent randomness and symmetric motifs into, eventually, a highly structured, repeating highway. The highway is _not_ hardcoded anywhere in this repository; it emerges from repeated local interactions.
 
-_(*) You can contrast this with Conway's _Game of Life_, where, unlike Langton's ant, the life updates all cells in parallel. The ant, on the other hand, updates each cell sequentially._
+> _(*) You can contrast this with Conway's _Game of Life_, where, unlike Langton's ant, the life updates all cells in parallel. The ant, on the other hand, updates each cell sequentially._
 
 ### [2] Deterministic Chaos (Unpredictability Without Randomness)
 Langton's ant is fully deterministic. For a fixed starting state, it always yields the same outcome... However, small changes in initial conditions (such as the ant's starting cell or its orientation) lead to dramatically different early trajectories, which is what we refer to as "deterministic chaos" (*). While the system is not random, it is computationally unpredictable for long periods of time.
 
-_(*) Deterministic Chaos refers to chaos-like behavior in a deterministic system._
+> _(*) Deterministic Chaos refers to chaos-like behavior in a deterministic system._
 
 ### [3] Turing Completeness (Computational Universality)
 A system is said to be Turing-complete if it can simulate any computation when given enough time and space. Langton’s original ant is not proven to be Turing-complete, but variants are (*).
 
-_(*) Researchers have shown that, by modifying rules or initial configurations, you can build wires, memory, or logic gates using only ant motions and cell states. In other words, a "toy ant" on a grid can simulate a full computer. This means that computation is not tied exclusively to conventional digital machines, but that even simple physical systems can compute... This connects to DNA computing, chemical reaction networks, quantum and biological computation, etc. In other words, computation is an emergent property of rule-based systems, not just machines._
+> _(*) Researchers have shown that, by modifying rules or initial configurations, you can build wires, memory, or logic gates using only ant motions and cell states. In other words, a "toy ant" on a grid can simulate a full computer. This means that computation is not tied exclusively to conventional digital machines, but that even simple physical systems can compute... This connects to DNA computing, chemical reaction networks, quantum and biological computation, etc. In other words, computation is an emergent property of rule-based systems, not just machines._
 
 ## About this Code Repository
 ### Installation Instructions

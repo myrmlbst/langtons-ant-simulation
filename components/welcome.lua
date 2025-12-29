@@ -21,7 +21,7 @@ function Welcome.load()
     button.y = love.graphics.getHeight() / 2 - button.height / 2 + 10
     
     -- clicking (glitchy) sound
-    clickSound = love.audio.newSource("assets/sounds/glitch.wav", "static")
+    clickSound = love.audio.newSource("sounds/glitch.wav", "static")
     clickSound:setVolume(0.5) -- set volume to 50%
 end
 

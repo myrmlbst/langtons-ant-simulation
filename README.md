@@ -22,6 +22,8 @@ Despite these simple, deterministic rules, the system goes through three distinc
 
 This transition from chaos to order is what makes Langton’s Ant famous.
 
+![Langton's Ant (One Ant)](./images/one.jpg)
+
 ## Significance
 ### [1] Emergence
 _Emergence_ means that some global structure appears despite the fact that each component follows very simple, local rules, and that there is no central control or a part that “knows” the overall pattern. In this algorithm, the ant only sees one square at a time without memorizing any of its previous moves (*). The grid itself also has no built-in structure.
@@ -40,7 +42,12 @@ A system is said to be Turing-complete if it can simulate any computation when g
 
 > _(*) Researchers have shown that, by modifying rules or initial configurations, you can build wires, memory, or logic gates using only ant motions and cell states. In other words, a "toy ant" on a grid can simulate a full computer. This means that computation is not tied exclusively to conventional digital machines, but that even simple physical systems can compute... This connects to DNA computing, chemical reaction networks, quantum and biological computation, etc. In other words, computation is an emergent property of rule-based systems, not just machines._
 
-## About this Code Repository
+## About this Repository
+### Controls
+This implementation allows the user to see how Langton's ant behaves on a grid, follow its movements, and observe the emergent patterns it creates over time. The user can also add multiple ants on the grid to explore how their interactions create complex behaviors and how different rules affect the overall system dynamics.
+
+![Langton's Ant (Multiple Ants)](./images/multiple.jpg)
+
 ### Installation Instructions
 - If you'd like to run this project locally, make sure you first have the [Lua](https://www.lua.org/download.html) programming language and the [LÖVE2D](https://love2d.org/) game engine installed locally.
 - Then, clone this repository, ```cd``` into the project, and run ```love .``` in the terminal to run the simulation.
@@ -53,12 +60,11 @@ langtons-ant/
 │   ├── grid.lua            # grid component
 │   └── welcome.lua         # home page component
 │
-├── assets/
-│   ├── sounds/             # audio files for visualizations
-│   └── images/             # screenshots and images
+├── images/                 # screenshots of grid and ants
+├── sounds/                 # sound effects
 │
 ├── docs/
-│   └── implementation.md   # implementation details (rules of the game)
+│   └── implementation.md   # implementation details
 │
 ├── main.lua                # init main simulation loop
 ├── conf.lua                # pop-up page configs

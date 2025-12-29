@@ -13,6 +13,7 @@ local gameState = GAME_STATE.WELCOME
 local grid, ants
 local cellSize = 5
 local smallFont = love.graphics.newFont(12)
+local antSound
 
 local colors = {
     background = {0.9, 0.9, 0.9},
@@ -40,6 +41,10 @@ function love.load()
     -- initialize grid and place ant in the center
     grid = Grid.new(cellSize, gridWidth, gridHeight)
     ants = {}
+    
+    -- load ant sound
+    antSound = love.audio.newSource("sounds/ant.mp3", "static")
+    antSound:setVolume(0.5)
     
     -- initialize simulation controls
     isSimulationRunning = false
@@ -161,6 +166,7 @@ function love.mousepressed(x, y, button, istouch, presses)
         if grid:isInBounds(cellX, cellY) then
             if button == 1 then
                 ants[#ants + 1] = Ant.new(cellX, cellY)
+                love.audio.play(antSound)
             else
                 -- toggle cell state on right click
                 local current = grid:getCell(cellX, cellY)

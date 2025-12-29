@@ -1,6 +1,6 @@
 # Langton's Ant 
 
-This repository contains the source code for my implementation of _Langton's Ant_, a theoretical “ant” that moves on an infinite 2D grid of square cells. Each cell can be in one of two states: white, or black (colored).
+This repository contains the source code for my implementation of _Langton's Ant_, a theoretical “ant” that moves on an infinite 2D grid of square cells. Each cell can be in one of two states: white, or black.
 
 ## Rules for the Ant's Movement
 The rules are very simple: The user is prompted to pick a starting point for the ant on the grid. From there, the ant can start its traversal across the grid using the following mechanisms:

@@ -11,13 +11,11 @@ local DIRECTIONS = {
 
 
 -- create a new ant at the given position
-function Ant.new(x, y)
+function Ant.new(x, y, directionIndex)
     local self = setmetatable({}, Ant)
     self.x = x or 1
     self.y = y or 1
-    self.direction = DIRECTIONS.UP  -- start facing up
-    self.directionIndex = 1         -- index in the directions table
-    
+
     -- directions in order (for turning)
     self.directions = {
         DIRECTIONS.UP,
@@ -25,6 +23,17 @@ function Ant.new(x, y)
         DIRECTIONS.DOWN,
         DIRECTIONS.LEFT
     }
+
+    if type(directionIndex) ~= "number" then
+        directionIndex = 1
+    end
+    directionIndex = math.floor(directionIndex)
+    if directionIndex < 1 or directionIndex > #self.directions then
+        directionIndex = 1
+    end
+
+    self.directionIndex = directionIndex -- index in the directions table
+    self.direction = self.directions[self.directionIndex]
     
     return self
 end

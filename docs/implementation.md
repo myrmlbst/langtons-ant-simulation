@@ -7,7 +7,7 @@
 
 ## Enhancements (Optional):
 - ~~Allow user to add the ant manually by clicking on the grid~~
-- Allow user to pick which direction the ant is facing
+- ~~Allow user to pick which direction the ant is facing~~
 - ~~Add multiple ants on a singular grid~~
 - ~~Add `speed up` and `slow down` functionality~~
 - ~~Add `ESC` to go out of simulation~~

@@ -14,6 +14,10 @@ local grid, ants
 local cellSize = 5
 local smallFont = love.graphics.newFont(12)
 local antSound
+local totalAntsSpawned = 0
+
+local placementDirectionIndex = 1
+local placementDirectionNames = {"Up", "Right", "Down", "Left"}
 
 local colors = {
     background = {0.9, 0.9, 0.9},
@@ -38,9 +42,10 @@ function love.load()
     local gridWidth = math.floor(windowWidth / cellSize)
     local gridHeight = math.floor(windowHeight / cellSize)
     
-    -- initialize grid and place ant in the center
+    -- initialize grid and reset counters
     grid = Grid.new(cellSize, gridWidth, gridHeight)
     ants = {}
+    totalAntsSpawned = 0
     
     -- load ant sound
     antSound = love.audio.newSource("sounds/ant.mp3", "static")
@@ -50,6 +55,8 @@ function love.load()
     isSimulationRunning = false
     simulationSpeed = 1
     stepCounter = 0
+
+    placementDirectionIndex = 1
 end
 
 
@@ -124,27 +131,48 @@ function love.draw()
         
         -- controls section
         love.graphics.setColor(0.3, 0.3, 0.3)
+        -- draw text twice with slight offset for bold effect
         love.graphics.print("CONTROLS:", x, y)
-        y = y + lineHeight * 1.5
+        love.graphics.print("CONTROLS:", x + 1, y)
+        y = y + lineHeight
         
         local controls = {
-            "Space: " .. (isSimulationRunning and "Pause" or "Start"),
-            "R: Reset",
+            "[Space]: " .. (isSimulationRunning and "Pause" or "Start"),
+            "[R]: Reset",
+            "[+]/[−]: Change speed",
+            "[ESC]: Quit",
+            -- most important mechanisms:
+            "[W]/[A]/[S]/[D]: Set placement direction",
+            "Make sure you specify the direction before adding an ant",
             "Click on Cell: Add ant",
-            -- "Right Click: Toggle cell",
-            "+/−: Change speed",
-            "ESC: Quit"
         }
 
-        for _, text in ipairs(controls) do
-            love.graphics.print(text, x, y)
+        for i = 1, 4 do
+            love.graphics.print(controls[i], x, y)
             y = y + lineHeight
         end
         
+        love.graphics.setColor(0.2, 0.4, 0.8) -- blue
+        for i = 5, #controls do
+            love.graphics.print(controls[i], x, y)
+            y = y + lineHeight
+        end
+        love.graphics.setColor(0.3, 0.3, 0.3) -- reset to original color
+        
         y = y + lineHeight * 0.5
+        -- draw text twice with slight offset for bold effect
+        love.graphics.print("CURRENT STATS:", x, y)
+        love.graphics.print("CURRENT STATS:", x + 1, y)
+        y = y + lineHeight
+        love.graphics.print("Current Ants: " .. #ants, x, y)
+        y = y + lineHeight
+        love.graphics.print("Total Ants: " .. totalAntsSpawned, x, y)
+        y = y + lineHeight
         love.graphics.print("Steps: " .. stepCounter, x, y)
         y = y + lineHeight
         love.graphics.print("Speed: " .. simulationSpeed .. "x", x, y)
+        y = y + lineHeight
+        love.graphics.print("Latest ant's placement direction: " .. placementDirectionNames[placementDirectionIndex], x, y)
         
         love.graphics.setFont(oldFont)
     end
@@ -165,7 +193,8 @@ function love.mousepressed(x, y, button, istouch, presses)
         
         if grid:isInBounds(cellX, cellY) then
             if button == 1 then
-                ants[#ants + 1] = Ant.new(cellX, cellY)
+                ants[#ants + 1] = Ant.new(cellX, cellY, placementDirectionIndex)
+                totalAntsSpawned = totalAntsSpawned + 1
                 love.audio.play(antSound)
             else
                 -- toggle cell state on right click
@@ -185,6 +214,20 @@ function love.keypressed(key)
     end
     
     if gameState == GAME_STATE.GRID_VIEW then
+        if key == "w" then
+            placementDirectionIndex = 1
+            return
+        elseif key == "d" then
+            placementDirectionIndex = 2
+            return
+        elseif key == "s" then
+            placementDirectionIndex = 3
+            return
+        elseif key == "a" then
+            placementDirectionIndex = 4
+            return
+        end
+
         if key == "space" then
             if #ants > 0 then
                 isSimulationRunning = not isSimulationRunning
@@ -196,7 +239,9 @@ function love.keypressed(key)
             grid = Grid.new(cellSize, gridWidth, gridHeight)
             ants = {}
             stepCounter = 0
+            totalAntsSpawned = 0
             isSimulationRunning = false
+            placementDirectionIndex = 1
         
         elseif key == "+" or key == "up" then
             -- speed up simulation

@@ -1,5 +1,7 @@
 local Welcome = {}
+
 local font = nil
+local clickSound = nil  -- variable to store the sound
 
 local button = {
     x = 0,
@@ -16,7 +18,11 @@ local button = {
 function Welcome.load()
     font = love.graphics.newFont(24)
     button.x = love.graphics.getWidth() / 2 - button.width / 2
-    button.y = love.graphics.getHeight() / 2 - button.height / 2 + 100
+    button.y = love.graphics.getHeight() / 2 - button.height / 2 + 80
+    
+    -- clicking (glitchy) sound
+    clickSound = love.audio.newSource("assets/sounds/glitch.wav", "static")
+    clickSound:setVolume(0.5)  -- set volume to 50%
 end
 
 function Welcome.update(dt)
@@ -47,12 +53,32 @@ function Welcome.draw()
         "This project demonstrates Deterministic Chaos:",
         "the emergence of complex patterns from simple rules."
     }
+
+    local githubInformation = {
+        "",
+        "To learn more about this implementation, you can head to",
+        "https://github.com/myrmlbst/langtons-ant",
+        "and get access to the source code and documentation"
+    }
     
     love.graphics.setFont(font)
     for i, line in ipairs(description) do
         local textWidth = font:getWidth(line)
-        love.graphics.print(line, love.graphics.getWidth()/2 - textWidth/2, 180 + (i * 30))
+        love.graphics.print(line, love.graphics.getWidth()/2 - textWidth/2, 150 + (i * 30))
     end
+    
+    local smallFont = love.graphics.newFont(15)
+    love.graphics.setFont(smallFont)
+    love.graphics.setColor(0.5, 0.5, 0.5)
+    
+    for i, line in ipairs(githubInformation) do
+        local textWidth = smallFont:getWidth(line)
+        love.graphics.print(line, love.graphics.getWidth()/2 - textWidth/2, 380 + (i * 28))
+    end
+    
+    -- reset to default font and color for the button
+    love.graphics.setFont(font)
+    love.graphics.setColor(1, 1, 1)  -- reset to white
 
     love.graphics.setColor(button.currentColor)
     love.graphics.rectangle("fill", button.x, button.y, button.width, button.height, 10, 200)
@@ -67,6 +93,11 @@ function Welcome.mousepressed(x, y, buttonPressed)
     if buttonPressed == 1 then -- left mouse button
         if x > button.x and x < button.x + button.width and
            y > button.y and y < button.y + button.height then
+            -- play the click sound if it's loaded
+            if clickSound then
+                love.audio.stop(clickSound)  -- stop sound if it's already playing
+                love.audio.play(clickSound)  -- play the sound
+            end
             return true -- signal that we should switch to the main simulation
         end
     end

@@ -16,9 +16,7 @@ local colors = {
     cell = {0.2, 0.2, 0.2}
 }
 
-function love.load()
-    love.window.setTitle("Grid Demo")
-    
+function love.load()    
     -- init welcome screen
     Welcome.load()
     

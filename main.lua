@@ -9,8 +9,11 @@ local GAME_STATE = {
 }
 
 local gameState = GAME_STATE.WELCOME
+
 local grid, ant
-local cellSize = 10
+local cellSize = 5
+local smallFont = love.graphics.newFont(12)
+
 local colors = {
     background = {0.9, 0.9, 0.9},
     grid = {0.8, 0.8, 0.8},
@@ -60,9 +63,10 @@ function love.update(dt)
                 -- check if ant is out of bounds
                 if not grid:isInBounds(ant.x, ant.y) then
                     -- reset ant position to center if it goes out of bounds
+                    local gridWidth, gridHeight = grid:getDimensions()
                     ant = Ant.new(
-                        math.floor(grid:getDimensions() / 2),
-                        math.floor(select(2, grid:getDimensions()) / 2)
+                        math.floor(gridWidth / 2),
+                        math.floor(gridHeight / 2)
                     )
                 end
             end
@@ -103,6 +107,38 @@ function love.draw()
             ant:draw(cellSize)
         end
 
+        -- save current font
+        local oldFont = love.graphics.getFont()
+        love.graphics.setFont(smallFont)
+        
+        -- calculate positions
+        local x = 15
+        local y = 10
+        local lineHeight = smallFont:getHeight() + 2
+        
+        -- controls section
+        love.graphics.setColor(0.3, 0.3, 0.3)
+        love.graphics.print("CONTROLS:", x, y)
+        y = y + lineHeight * 1.5
+        
+        local controls = {
+            "Space: " .. (isSimulationRunning and "Pause" or "Start"),
+            "R: Reset",
+            "+/−: Change speed",
+            "ESC: Quit"
+        }
+        
+        for _, text in ipairs(controls) do
+            love.graphics.print(text, x, y)
+            y = y + lineHeight
+        end
+        
+        y = y + lineHeight * 0.5
+        love.graphics.print("Steps: " .. stepCounter, x, y)
+        y = y + lineHeight
+        love.graphics.print("Speed: " .. simulationSpeed .. "x", x, y)
+        
+        love.graphics.setFont(oldFont)
     end
 end
 
@@ -112,6 +148,7 @@ function love.mousepressed(x, y, button, istouch, presses)
         if Welcome.mousepressed(x, y, button) then
             gameState = GAME_STATE.GRID_VIEW
         end
+    
     elseif gameState == GAME_STATE.GRID_VIEW and button == 1 then
         -- toggle cell state on click
         local cellX = math.floor(x / cellSize) + 1
@@ -125,23 +162,31 @@ function love.mousepressed(x, y, button, istouch, presses)
 end
 
 function love.keypressed(key)
+    if key == "escape" then
+        love.event.quit()
+        return
+    end
+    
     if gameState == GAME_STATE.GRID_VIEW then
         if key == "space" then
             isSimulationRunning = not isSimulationRunning
         
         elseif key == "r" then
             -- reset simulation
-            grid = Grid.new(cellSize, grid:getDimensions())
-            local startX = math.floor(select(1, grid:getDimensions()) / 2)
-            local startY = math.floor(select(2, grid:getDimensions()) / 2)
+            local gridWidth, gridHeight = grid:getDimensions()
+            grid = Grid.new(cellSize, gridWidth, gridHeight)
+            local startX = math.floor(gridWidth / 2)
+            local startY = math.floor(gridHeight / 2)
             ant = Ant.new(startX, startY)
             stepCounter = 0
             isSimulationRunning = false
         
-        elseif key == "+" then
-            simulationSpeed = math.min(simulationSpeed * 2, 64)
+        elseif key == "+" or key == "up" then
+            -- speed up simulation
+            simulationSpeed = math.min(simulationSpeed * 2, 128)
         
-        elseif key == "-" then
+        elseif key == "-" or key == "down" then
+            -- slow down simulation
             simulationSpeed = math.max(1, math.floor(simulationSpeed / 2))
         
         elseif key == "return" and not isSimulationRunning then

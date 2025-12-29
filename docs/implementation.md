@@ -8,8 +8,7 @@
 ## Enhancements (Optional):
 - Allow user to add the ant manually by clicking on the grid (+ picking which direction the ant is facing)
 - Add multiple ants with different starting positions and facing directions
-- Add `speed up` and `slow down` functionality
-- Add `ESC` to go out of simulation
-- Add `SPACE` to pause/resume simulation
-- Add `R` to reset simulation
-- Add `C` to clear the grid
+- ~~Add `speed up` and `slow down` functionality~~
+- ~~Add `ESC` to go out of simulation~~
+- ~~Add `SPACE` to pause/resume simulation~~
+- ~~Add `R` to reset simulation~~

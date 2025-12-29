@@ -83,8 +83,8 @@ end
 
 -- draw the ant (to be called from the main draw loop)
 function Ant:draw(cellSize)
-    -- draw a red square for the ant
-    love.graphics.setColor(1, 0, 0, 0.7)
+    -- draw a red square for the ant (RGB: 255, 0, 0)
+    love.graphics.setColor(1, 0, 0, 0.9)
     love.graphics.rectangle("fill", 
         (self.x - 1) * cellSize, 
         (self.y - 1) * cellSize, 

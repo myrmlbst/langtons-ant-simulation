@@ -18,11 +18,11 @@ local button = {
 function Welcome.load()
     font = love.graphics.newFont(24)
     button.x = love.graphics.getWidth() / 2 - button.width / 2
-    button.y = love.graphics.getHeight() / 2 - button.height / 2 + 80
+    button.y = love.graphics.getHeight() / 2 - button.height / 2 + 10
     
     -- clicking (glitchy) sound
     clickSound = love.audio.newSource("assets/sounds/glitch.wav", "static")
-    clickSound:setVolume(0.5)  -- set volume to 50%
+    clickSound:setVolume(0.5) -- set volume to 50%
 end
 
 function Welcome.update(dt)

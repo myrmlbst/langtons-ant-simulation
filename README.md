@@ -28,7 +28,7 @@ This transition from chaos to order is what makes Langton’s Ant famous.
 ### [1] Emergence
 _Emergence_ means that some global structure appears despite the fact that each component follows very simple, local rules, and that there is no central control or a part that “knows” the overall pattern. In this algorithm, the ant only sees one square at a time without memorizing any of its previous moves (*). The grid itself also has no built-in structure.
 
-Despite all of that, the ant emerges from apparent randomness and symmetric motifs into, eventually, a highly structured, repeating highway. The highway is _not_ hardcoded anywhere in this repository; it emerges from repeated local interactions.
+Despite all of that, the ant eventually emerges from apparent randomness into a highly structured, repeating highway. The highway is _not_ hardcoded anywhere in this repository; it emerges from repeated local interactions.
 
 > _(*) You can contrast this with Conway's _Game of Life_, where, unlike Langton's ant, the life updates all cells in parallel. The ant, on the other hand, updates each cell sequentially._
 
@@ -44,7 +44,7 @@ A system is said to be Turing-complete if it can simulate any computation when g
 
 ## About this Repository
 ### Controls
-This implementation allows the user to see how Langton's ant behaves on a grid, follow its movements, and observe the emergent patterns it creates over time. The user can also add multiple ants on the grid to explore how their interactions create complex behaviors and how different rules affect the overall system dynamics.
+This implementation allows the user to see how Langton's ant behaves on a grid, follow its movements, and observe the emergent patterns it creates over time. The user can also add multiple ants on the grid to explore how their interactions create complex behaviors, and how that affects the overall system dynamics.
 
 ![Langton's Ant (Multiple Ants)](./images/multiple.jpg)
 

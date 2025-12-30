@@ -48,6 +48,8 @@ This implementation allows the user to see how Langton's ant behaves on a grid, 
 
 ![Langton's Ant (Multiple Ants)](./images/multiple.jpg)
 
+I also ended up observing [this odd, recursive pattern](https://youtu.be/EcnEnaLu0ZA).
+
 ### Installation Instructions
 - If you'd like to run this project locally, make sure you first have the [Lua](https://www.lua.org/download.html) programming language and the [LÖVE2D](https://love2d.org/) game engine installed locally.
 - Then, clone this repository, ```cd``` into the project, and run ```love .``` in the terminal to run the simulation.

@@ -35,7 +35,7 @@ Despite all of that, the ant eventually emerges from apparent randomness into a 
 ### [2] Deterministic Chaos (Unpredictability Without Randomness)
 Langton's ant is fully deterministic. For a fixed starting state, it always yields the same outcome... However, small changes in initial conditions (such as the ant's starting cell or its orientation) lead to dramatically different early trajectories, which is what we refer to as "deterministic chaos" (*). While the system is not random, it is computationally unpredictable for long periods of time.
 
-> _(*) Deterministic Chaos refers to chaos-like behavior in a deterministic system._
+> _(*) Deterministic Chaos in this context refers to chaos-like behavior in a deterministic system. It is not "chaotic" in the strict mathematical sense: Recall that the ant does not exhibit sustained chaos forever. Instead, it falls back to the highway pattern after around 10,000 steps._
 
 ### [3] Turing Completeness (Computational Universality)
 A system is said to be Turing-complete if it can simulate any computation when given enough time and space. Langton’s original ant is not proven to be Turing-complete, but variants are (*).
@@ -44,11 +44,9 @@ A system is said to be Turing-complete if it can simulate any computation when g
 
 ## About this Repository
 ### Controls
-This implementation allows the user to see how Langton's ant behaves on a grid, follow its movements, and observe the emergent patterns it creates over time. The user can also add multiple ants on the grid to explore how their interactions create complex behaviors, and how that affects the overall system dynamics.
+This implementation allows the user to see how Langton's ant behaves on a grid, follow its movements, and observe the emergent patterns it creates over time. The user can also add multiple ants on the grid at the same time to explore how their interactions create complex behaviors, and how that affects the overall system dynamics. I, for example, ended up observing [this odd, recursive pattern](https://youtu.be/EcnEnaLu0ZA), and other similar infinite loops that only occur when the ant's path has obstructions (another ant's traversal path patterns).
 
-![Langton's Ant (Multiple Ants)](./images/multiple.jpg)
-
-I also ended up observing [this odd, recursive pattern](https://youtu.be/EcnEnaLu0ZA).
+![Langton's Ant (Multiple Ants)](./images/multiple.jpg) 
 
 ### Installation Instructions
 - If you'd like to run this project locally, make sure you first have the [Lua](https://www.lua.org/download.html) programming language and the [LÖVE2D](https://love2d.org/) game engine installed locally.

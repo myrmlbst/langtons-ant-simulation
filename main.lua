@@ -11,7 +11,9 @@ local GAME_STATE = {
 local gameState = GAME_STATE.WELCOME
 
 local grid, ants
-local cellSize = 5
+
+local cellSize = 8
+
 local smallFont = love.graphics.newFont(12)
 local antSound
 local totalAntsSpawned = 0

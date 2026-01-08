@@ -1,6 +1,7 @@
 local Ant = {}
 Ant.__index = Ant
 
+
 -- directions the ant can face (in clockwise order)
 local DIRECTIONS = {
     UP = {x = 0, y = -1},    -- UP

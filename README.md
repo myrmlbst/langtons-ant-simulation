@@ -52,6 +52,9 @@ This implementation allows the user to see how Langton's ant behaves on a grid, 
 - If you'd like to run this project locally, make sure you first have the [Lua](https://www.lua.org/download.html) programming language and the [LÖVE2D](https://love2d.org/) game engine installed locally.
 - Then, clone this repository, ```cd``` into the project, and run ```love .``` in the terminal to run the simulation.
 
+### Accessibility/Visibility Note
+In the images, the grid size is set to 5. In the latest commit, it was updated to 8 for ease of visibility. You can change the grid size (`local cellSize = 8`) in the `main.lua` file. It is recommended that you decrease the size of the grids if you want to experiment with multiple ants, as that gives them more room for movement.
+
 ### Directory Structure
 ```
 langtons-ant/

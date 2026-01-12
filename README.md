@@ -1,6 +1,6 @@
 # Langton's Ant 
 
-This repository contains the source code for my implementation of _Langton's Ant_, a theoretical “ant” that moves on an infinite 2D grid of square cells. Each cell can be in one of two states: white, or black.
+This repository contains the source code for my implementation of _Langton's Ant_, a theoretical “ant” that moves on an infinite 2D grid of square cells. Each cell can be in one of two states: white or black.
 
 ## Rules for the Ant's Movement
 The rules are very simple: The user is prompted to pick a starting point for the ant on the grid. From there, the ant can start its traversal across the grid using the following mechanisms:
@@ -20,7 +20,7 @@ Despite these simple, deterministic rules, the system goes through three distinc
 2. **Emergent order** appears after a few thousand steps. Structured patterns begin to appear at this stage.
 3. The appearance of **the “highway”**. Eventually, the ant settles into a repeating pattern and builds an infinite diagonal “highway,” moving away forever in a predictable direction.
 
-This transition from chaos to order is what makes Langton’s Ant famous.
+This transition from apparent chaos to structured order is what makes Langton’s Ant famous.
 
 ![Langton's Ant (One Ant)](./images/one.jpg)
 
@@ -30,10 +30,10 @@ _Emergence_ means that some global structure appears despite the fact that each 
 
 Despite all of that, the ant eventually emerges from apparent randomness into a highly structured, repeating highway. The highway is _not_ hardcoded anywhere in this repository; it emerges from repeated local interactions.
 
-> _(*) You can contrast this with Conway's _Game of Life_, where, unlike Langton's ant, the life updates all cells in parallel. The ant, on the other hand, updates each cell sequentially._
+> _(*) You can contrast this with Conway's _Game of Life_, where, unlike Langton's Ant, the life updates all cells in parallel. The ant, on the other hand, updates each cell sequentially._
 
 ### [2] Deterministic Chaos (Unpredictability Without Randomness)
-Langton's ant is fully deterministic. For a fixed starting state, it always yields the same outcome... However, small changes in initial conditions (such as the ant's starting cell or its orientation) lead to dramatically different early trajectories, which is what we refer to as "deterministic chaos" (*). While the system is not random, it is computationally unpredictable for long periods of time.
+Langton's Ant is fully deterministic. For a fixed starting state, it always yields the same outcome. However, small changes in initial conditions (such as the ant's starting cell or its orientation) lead to dramatically different early trajectories, which is what we refer to as "deterministic chaos" (*). While the system is not random, it is computationally unpredictable for long periods of time.
 
 > _(*) Deterministic Chaos in this context refers to chaos-like behavior in a deterministic system. It is not "chaotic" in the strict mathematical sense: Recall that the ant does not exhibit sustained chaos forever. Instead, it falls back to the highway pattern after around 10,000 steps._
 
@@ -44,7 +44,7 @@ A system is said to be Turing-complete if it can simulate any computation when g
 
 ## About this Repository
 ### Controls
-This implementation allows the user to see how Langton's ant behaves on a grid, follow its movements, and observe the emergent patterns it creates over time. The user can also add multiple ants on the grid at the same time to explore how their interactions create complex behaviors, and how that affects the overall system dynamics. I, for example, ended up observing [this odd, recursive pattern](https://youtu.be/EcnEnaLu0ZA), and other similar infinite loops that only occur when the ant's path has obstructions (another ant's traversal path patterns).
+This implementation allows the user to see how Langton's Ant behaves on a grid, follow its movements, and observe the emergent patterns it creates over time. The user can also add multiple ants on the grid at the same time to explore how their interactions create complex behaviors, and how that affects the overall system dynamics. I, for example, ended up observing [this odd, recursive pattern](https://youtu.be/EcnEnaLu0ZA), and other similar infinite loops that only occur when the ant's path has obstructions (another ant's traversal path patterns).
 
 ![Langton's Ant (Multiple Ants)](./images/multiple.jpg) 
 
@@ -53,7 +53,7 @@ This implementation allows the user to see how Langton's ant behaves on a grid, 
 - Then, clone this repository, ```cd``` into the project, and run ```love .``` in the terminal to run the simulation.
 
 ### Accessibility/Visibility Note
-In the images, the grid size is set to 5. In the latest commit, it was updated to 8 for ease of visibility. You can change the grid size (`local cellSize = 8`) in the `main.lua` file. It is recommended that you decrease the size of the grids if you want to experiment with multiple ants, as that gives them more room for movement.
+In the images, the grid size is set to 5. In the latest commit, it was updated to 8 for ease of visibility. You can change the grid size (`local cellSize = 8`) in the `main.lua` file. It is recommended that you decrease the size of the grid if you want to experiment with multiple ants, as that gives them more room for movement.
 
 ### Directory Structure
 ```
@@ -65,14 +65,12 @@ langtons-ant/
 │
 ├── images/                 # screenshots of grid and ants
 ├── sounds/                 # sound effects
-│
 ├── docs/
 │   └── implementation.md   # implementation details
 │
 ├── main.lua                # init main simulation loop
 ├── conf.lua                # pop-up page configs
 ├── .gitignore              # ignore editor configs
-│ 
 ├── LICENSE
 └── README.md
 ```
